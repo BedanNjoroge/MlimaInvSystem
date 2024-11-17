@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block title %}Factory - Boulder Reception{% endblock %}
+
+{% block content %}
+    <h1>Receive Boulder in Factory</h1>
+    <form method="post">
+        <label for="boulder_id">Boulder ID:</label><br>
+        <select id="boulder_id" name="boulder_id" required onchange="autoFillDescription(); setReceivedTime();">
+            <option value="">Select Boulder</option>
+            {% for boulder_id in boulder_ids %}
+                <option value="{{ boulder_id }}">{{ boulder_id }}</option>
+            {% endfor %}
+        </select><br>
+
+        <label for="description">Description:</label><br>
+        <input type="text" id="description" name="description" required><br>
+
+        <label for="received_time">Received Time (Auto Generated):</label><br>
+        <input type="text" id="received_time" name="received_time" readonly><br>
+
+        <label for="good_boulder">Good Boulder:</label><br>
+        <input type="text" id="good_boulder" name="good_boulder" required><br>
+
+        <label for="defect_line">Defect Line:</label><br>
+        <input type="text" id="defect_line" name="defect_line" required><br>
+
+        <label for="natural_cracks">Natural Cracks:</label><br>
+        <input type="text" id="natural_cracks" name="natural_cracks" required><br>
+
+        <label for="mining_cracks">Mining Cracks:</label><br>
+        <input type="text" id="mining_cracks" name="mining_cracks" required><br>
+
+        <label for="undersize">Undersize:</label><br>
+        <input type="text" id="undersize" name="undersize" required><br>
+
+        <input type="submit" value="Receive Boulder">
+    </form>
+
+    {% if message %}
+        <p class="message">{{ message }}</p>
+    {% endif %}
+    
+    <script>
+        console.log('Boulder descriptions:', {{ boulder_dict | tojson | safe }});
+
+        const boulderDescriptions = {{ boulder_dict | tojson | safe }};
+        
+        function autoFillDescription() {
+            const boulderId = document.getElementById('boulder_id').value;
+            const description = boulderDescriptions[boulderId] || '';
+            document.getElementById('description').value = description;
+        }
+
+        function setReceivedTime() {
+            const receivedTime = new Date().toLocaleString('en-US', { timeZone: 'Africa/Nairobi' });
+            document.getElementById('received_time').value = receivedTime;
+        }
+
+        // Set received time when the page loads
+        window.onload = setReceivedTime;
+    </script>
+{% endblock %}

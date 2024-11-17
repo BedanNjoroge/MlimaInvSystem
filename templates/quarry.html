@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block title %}Quarry Section - Mlima Granite{% endblock %}
+
+{% block content %}
+    <h2>Quarry Section</h2>
+    <div class="form-container">
+        <form method="post">
+            <label for="boulder_id">Boulder ID:</label><br>
+            <input type="text" id="boulder_id" name="boulder_id" required><br>
+
+            <label for="date">Date:</label><br>
+            <input type="date" id="date" name="date" required><br>
+
+            <label for="description">Description (color, size):</label><br>
+            <input type="text" id="description" name="description" required><br>
+
+            <label for="good_boulder">Good Boulder:</label><br>
+            <select id="good_boulder" name="good_boulder">
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+            </select><br>
+
+            <label for="defect_line">Defect Line:</label><br>
+            <select id="defect_line" name="defect_line">
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+            </select><br>
+
+            <label for="natural_cracks">Natural Cracks:</label><br>
+            <select id="natural_cracks" name="natural_cracks">
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+            </select><br>
+
+            <label for="mining_cracks">Mining Cracks:</label><br>
+            <select id="mining_cracks" name="mining_cracks">
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+            </select><br>
+
+            <label for="undersize">Undersize:</label><br>
+            <select id="undersize" name="undersize">
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+            </select><br>
+
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+
+    {% if message %}
+        <p class="message">{{ message }}</p>
+    {% endif %}
+{% endblock %}

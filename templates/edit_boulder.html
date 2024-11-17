@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>Edit Boulder - Mlima Granite</title>
+</head>
+<body>
+    <h1>Edit Boulder</h1>
+    <form method="post">
+        <label for="boulder_id">Boulder ID:</label><br>
+        <input type="text" id="boulder_id" name="boulder_id" value="{{ boulder[0] }}" readonly><br>
+
+        <label for="date">Date:</label><br>
+        <input type="date" id="date" name="date" value="{{ boulder[1] }}" required><br>
+        
+        <label for="description">Description (color, size):</label><br>
+        <input type="text" id="description" name="description" value="{{ boulder[2] }}" required><br>
+        
+        <label for="good_boulder">Good Boulder:</label><br>
+        <select id="good_boulder" name="good_boulder">
+            <option value="Yes" {{ 'selected' if boulder[3] == 'Yes' else '' }}>Yes</option>
+            <option value="No" {{ 'selected' if boulder[3] == 'No' else '' }}>No</option>
+        </select><br>
+        
+        <label for="defect_line">Defect Line:</label><br>
+        <select id="defect_line" name="defect_line">
+            <option value="Yes" {{ 'selected' if boulder[4] == 'Yes' else '' }}>Yes</option>
+            <option value="No" {{ 'selected' if boulder[4] == 'No' else '' }}>No</option>
+        </select><br>
+        
+        <label for="natural_cracks">Natural Cracks:</label><br>
+        <select id="natural_cracks" name="natural_cracks">
+            <option value="Yes" {{ 'selected' if boulder[5] == 'Yes' else '' }}>Yes</option>
+            <option value="No" {{ 'selected' if boulder[5] == 'No' else '' }}>No</option>
+        </select><br>
+        
+        <label for="mining_cracks">Mining Cracks:</label><br>
+        <select id="mining_cracks" name="mining_cracks">
+            <option value="Yes" {{ 'selected' if boulder[6] == 'Yes' else '' }}>Yes</option>
+            <option value="No" {{ 'selected' if boulder[6] == 'No' else '' }}>No</option>
+        </select><br>
+        
+        <label for="undersize">Undersize:</label><br>
+        <select id="undersize" name="undersize">
+            <option value="Yes" {{ 'selected' if boulder[7] == 'Yes' else '' }}>Yes</option>
+            <option value="No" {{ 'selected' if boulder[7] == 'No' else '' }}>No</option>
+        </select><br>
+        
+        <input type="submit" value="Update">
+    </form>
+</body>
+</html>

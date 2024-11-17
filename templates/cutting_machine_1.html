@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block title %}Cutting Machine 1{% endblock %}
+
+{% block content %}
+    <h1>Cutting Machine 1</h1>
+    <form method="post" onsubmit="setEndTime()">
+        <label for="boulder_id">Boulder ID:</label><br>
+        <select id="boulder_id" name="boulder_id" required onchange="autoFillDescription(); setStartTime();">
+            <option value="">Select Boulder</option>
+            {% for boulder_id in boulder_ids %}
+                <option value="{{ boulder_id }}">{{ boulder_id }}</option>
+            {% endfor %}
+        </select><br>
+
+        <label for="description">Description:</label><br>
+        <input type="text" id="description" name="description" required><br>
+
+        <label for="start_time">Start Time (Auto Generated):</label><br>
+        <input type="text" id="start_time" name="start_time" readonly><br>
+
+        <label for="end_time">End Time (Auto Generated):</label><br>
+        <input type="text" id="end_time" name="end_time" readonly><br>
+
+        <label for="num_slabs_cut">Number of Slabs Cut:</label><br>
+        <input type="number" id="num_slabs_cut" name="num_slabs_cut" required><br>
+
+        <input type="submit" value="Submit">
+    </form>
+
+    <h2>Previous Cuts</h2>
+    <table>
+        <tr>
+            <th>Boulder ID</th>
+            <th>Description</th>
+            <th>Number of Slabs Cut</th>
+            <th>Start Time</th>
+            <th>End Time</th>
+            <th>Machine Hours</th>
+        </tr>
+        {% for cut in cuts %}
+        <tr>
+            <td>{{ cut[1] }}</td>
+            <td>{{ cut[2] }}</td>
+            <td>{{ cut[3] }}</td>
+            <td>{{ cut[4] }}</td>
+            <td>{{ cut[5] }}</td>
+            <td>{{ cut[6] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <script>
+        console.log('Boulder descriptions:', {{ boulder_dict | tojson | safe }});
+
+        const boulderDescriptions = {{ boulder_dict | tojson | safe }};
+        
+        function autoFillDescription() {
+            const boulderId = document.getElementById('boulder_id').value;
+            const description = boulderDescriptions[boulderId] || '';
+            document.getElementById('description').value = description;
+        }
+
+        function setStartTime() {
+            const now = new Date();
+            const tzOffset = 180; // East Africa Time is UTC+3 hours
+            const localTime = new Date(now.getTime() + tzOffset * 60000);
+            const isoString = localTime.toISOString().slice(0, 19); // Remove milliseconds
+            document.getElementById('start_time').value = isoString;
+        }
+
+        function setEndTime() {
+            const now = new Date();
+            const tzOffset = 180; // East Africa Time is UTC+3 hours
+            const localTime = new Date(now.getTime() + tzOffset * 60000);
+            const isoString = localTime.toISOString().slice(0, 19); // Remove milliseconds
+            document.getElementById('end_time').value = isoString;
+        }
+    </script>
+{% endblock %}
