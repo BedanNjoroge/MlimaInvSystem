@@ -18,6 +18,7 @@ Once all stages are complete, slabs are dispatched to the warehouse for storage 
 In addition to tracking slabs and boulders, the system will manage essential factory and quarry inventory, including spare parts, consumables, operational equipment, lubricants, and construction materials. Worn-out machine parts, which may or may not be reusable, will also be recorded to ensure efficient use of resources and maintenance.
 
 **Automated Reporting with Slack Notifications**
+
 To streamline monitoring and reporting, the system will automate end-of-day reports using Slack notifications. These notifications will include:
 
 1. The number of boulders mined each day.
@@ -44,6 +45,7 @@ This project will offer a comprehensive inventory management solution, providing
 
 The folder structure is as below:
 
+```bash
 mlima_granite_inventory_system/
 │
 ├── app.py                   # Main Flask application file
@@ -75,3 +77,4 @@ mlima_granite_inventory_system/
 │
 └── logs/                    # Directory for log files
     └── app.log
+```
