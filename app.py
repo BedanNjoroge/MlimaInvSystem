@@ -27,7 +27,7 @@ def init_db():
     cursor.execute('DROP TABLE IF EXISTS slab')
 
     # Drop and recreate the boulder table
-    cursor.execute('DROP TABLE IF EXISTS boulder')
+    #cursor.execute('DROP TABLE IF EXISTS boulder')
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS boulder (
             boulder_id TEXT PRIMARY KEY,
@@ -44,7 +44,7 @@ def init_db():
     ''')
 
     # Drop and recreate the factory table
-    cursor.execute('DROP TABLE IF EXISTS factory')
+    #cursor.execute('DROP TABLE IF EXISTS factory')
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS factory (
             boulder_id TEXT PRIMARY KEY,
@@ -61,7 +61,7 @@ def init_db():
     ''')
 
     # Slabs table
-    cursor.execute('DROP TABLE IF EXISTS slabs')
+    #cursor.execute('DROP TABLE IF EXISTS slabs')
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS slabs (
             slab_id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -78,7 +78,7 @@ def init_db():
     ''')
 
     # Cutting Machine 1
-    cursor.execute('DROP TABLE IF EXISTS cutting_machine_1')
+    #cursor.execute('DROP TABLE IF EXISTS cutting_machine_1')
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS cutting_machine_1 (
             machine_id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -93,7 +93,7 @@ def init_db():
     ''')
 
     # Cutting Machine 2
-    cursor.execute('DROP TABLE IF EXISTS cutting_machine_2')
+    #cursor.execute('DROP TABLE IF EXISTS cutting_machine_2')
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS cutting_machine_2 (
             machine_id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -108,7 +108,7 @@ def init_db():
     ''')
 
     # Separation table
-    cursor.execute('DROP TABLE IF EXISTS separation')
+    #cursor.execute('DROP TABLE IF EXISTS separation')
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS separation (
             separation_id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -128,7 +128,7 @@ def init_db():
     ''')
 
     #Polishing table
-    cursor.execute('DROP TABLE IF EXISTS polishing')
+    #cursor.execute('DROP TABLE IF EXISTS polishing')
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS polishing (
             polishing_id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -147,7 +147,7 @@ def init_db():
     ''')
     
     # Edge Cutting Standard Table 
-    cursor.execute('DROP TABLE IF EXISTS edge_cutting_standard')
+    #cursor.execute('DROP TABLE IF EXISTS edge_cutting_standard')
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS edge_cutting_standard ( 
             edge_cutting_id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -165,7 +165,7 @@ def init_db():
     ''')
 
     # Edge Cutting Special Orders Table 
-    cursor.execute('DROP TABLE IF EXISTS edge_cutting_special_orders')
+    #cursor.execute('DROP TABLE IF EXISTS edge_cutting_special_orders')
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS edge_cutting_special_orders (
             edge_cutting_id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -184,7 +184,7 @@ def init_db():
     ''')
 
     # Bullnose Table 
-    cursor.execute('DROP TABLE IF EXISTS bullnose')
+    #cursor.execute('DROP TABLE IF EXISTS bullnose')
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS bullnose (
         bullnose_id INTEGER PRIMARY KEY AUTOINCREMENT, 
@@ -202,8 +202,8 @@ def init_db():
         ) 
     ''')
 
-   # Sealant Table 
-    cursor.execute('DROP TABLE IF EXISTS sealant')
+    # Sealant Table 
+    #cursor.execute('DROP TABLE IF EXISTS sealant')
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS sealant (
             sealant_id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -221,7 +221,7 @@ def init_db():
     ''')
 
     # Ready Slabs Table 
-    cursor.execute('DROP TABLE IF EXISTS ready_slabs')
+    #cursor.execute('DROP TABLE IF EXISTS ready_slabs')
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS ready_slabs (
             ready_slab_id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -238,7 +238,7 @@ def init_db():
     ''')
 
     # Movement table
-    cursor.execute('DROP TABLE IF EXISTS movement')
+    #cursor.execute('DROP TABLE IF EXISTS movement')
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS movement (
             movement_id INTEGER PRIMARY KEY AUTOINCREMENT,
