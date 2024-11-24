@@ -77,4 +77,3 @@ mlima_granite_inventory_system/
 │
 └── logs/                    # Directory for log files
     └── app.log
-```
