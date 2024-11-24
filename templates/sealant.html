@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+
+{% block title %}Sealant Section - Mlima Granite{% endblock %}
+
+{% block content %}
+    <h2>Sealant Section</h2>
+    <div class="form-container">
+        <form method="POST">
+            <div class="form-section left">
+                <label for="slab_id">Slab ID:</label><br>
+                <select id="slab_id" name="slab_id" required onchange="autoFillDescription();">
+                    <option value="">Select Slab</option>
+                    {% for slab_id, bullnose_description in slabs %}
+                        <option value="{{ slab_id }}" data-description="{{ bullnose_description }}">{{ slab_id }}</option>
+                    {% endfor %}
+                </select><br>
+
+                <label for="bullnose_description">Bullnose Description:</label><br>
+                <input type="text" id="bullnose_description" name="bullnose_description" readonly><br>
+
+                <label for="sealant_description">Sealant Description:</label><br>
+                <input type="text" id="sealant_description" name="sealant_description" required><br>
+
+                <label for="good_slab">Good Slab:</label><br>
+                <select id="good_slab" name="good_slab">
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                </select><br>
+
+                <label for="defect_line">Defect Line:</label><br>
+                <select id="defect_line" name="defect_line">
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                </select><br>
+
+                <label for="natural_cracks">Natural Cracks:</label><br>
+                <select id="natural_cracks" name="natural_cracks">
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                </select><br>
+
+                <label for="cutting_cracks">Cutting Cracks:</label><br>
+                <select id="cutting_cracks" name="cutting_cracks">
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                </select><br>
+
+                <label for="thickness_issue">Thickness Issue:</label><br>
+                <select id="thickness_issue" name="thickness_issue">
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                </select><br>
+
+                <button type="submit">Submit</button>
+            </div>
+        </form>
+    </div>
+
+    {#
+    <h2>Sealed Slabs</h2>
+    <table>
+        <tr>
+            <th>Slab ID</th>
+            <th>Bullnose Description</th>
+            <th>Sealant Description</th>
+            <th>Good Slab</th>
+            <th>Defect Line</th>
+            <th>Natural Cracks</th>
+            <th>Cutting Cracks</th>
+            <th>Thickness Issue</th>
+            <th>Sealant Time</th>
+        </tr>
+        {% for sealant in sealed_slabs %}
+        <tr>
+            <td>{{ sealant[1] }}</td>
+            <td>{{ sealant[2] }}</td>
+            <td>{{ sealant[3] }}</td>
+            <td>{{ sealant[4] }}</td>
+            <td>{{ sealant[5] }}</td>
+            <td>{{ sealant[6] }}</td>
+            <td>{{ sealant[7] }}</td>
+            <td>{{ sealant[8] }}</td>
+            <td>{{ sealant[9] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    #}
+
+    <script>
+        function autoFillDescription() {
+            const slabSelect = document.getElementById('slab_id');
+            const selectedOption = slabSelect.options[slabSelect.selectedIndex];
+            const description = selectedOption.getAttribute('data-description');
+
+            document.getElementById('bullnose_description').value = description;
+        }
+
+        window.onload = autoFillDescription;
+    </script>
+{% endblock %}

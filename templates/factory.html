@@ -3,7 +3,7 @@
 {% block title %}Factory - Boulder Reception{% endblock %}
 
 {% block content %}
-    <h1>Receive Boulder in Factory</h1>
+    <h2>Receiving Section</h2>
     <form method="post">
         <label for="boulder_id">Boulder ID:</label><br>
         <select id="boulder_id" name="boulder_id" required onchange="autoFillDescription(); setReceivedTime();">
@@ -20,19 +20,34 @@
         <input type="text" id="received_time" name="received_time" readonly><br>
 
         <label for="good_boulder">Good Boulder:</label><br>
-        <input type="text" id="good_boulder" name="good_boulder" required><br>
+        <select id="good_boulder" name="good_boulder">
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select><br>
 
         <label for="defect_line">Defect Line:</label><br>
-        <input type="text" id="defect_line" name="defect_line" required><br>
+        <select id="defect_line" name="defect_line">
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select><br>
 
         <label for="natural_cracks">Natural Cracks:</label><br>
-        <input type="text" id="natural_cracks" name="natural_cracks" required><br>
+        <select id="natural_cracks" name="natural_cracks">
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select><br>
 
         <label for="mining_cracks">Mining Cracks:</label><br>
-        <input type="text" id="mining_cracks" name="mining_cracks" required><br>
+        <select id="mining_cracks" name="mining_cracks">
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select><br>
 
         <label for="undersize">Undersize:</label><br>
-        <input type="text" id="undersize" name="undersize" required><br>
+        <select id="undersize" name="undersize">
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select><br>
 
         <input type="submit" value="Receive Boulder">
     </form>

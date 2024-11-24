@@ -1,30 +1,27 @@
 /* General Styles */
 body {
     font-family: Arial, sans-serif;
-    background-color: #3e7ca8; /* Dark Blue */
+    background-color: #557994; /* Light Gray */
     margin: 0;
     padding: 0;
 }
 
 /* Header Styling */
 header {
-    background-color: #8AA79F; /* Light Green */
-    color: #001524; /* Dark Blue */
+    background-color: #d3d3d3d5; /* Soft Gray */
+    color: #000000; /* Dark Gray */
     text-align: center;
     padding: 10px 0;
 }
 
 header h1 {
+    color: #8B4513; /* Brown */
     margin: 0;
-}
-
-header p {
-    margin: 5px 0 10px;
 }
 
 /* Navigation Styling */
 nav {
-    background-color: #FFECD1; /* Cream */
+    background-color: #e2ba87; /* Light Gray */
     padding: 10px 0;
 }
 
@@ -42,7 +39,7 @@ nav ul li {
 
 nav ul li a {
     text-decoration: none;
-    color: #001524; /* Dark Blue */
+    color: #000000; /* Dark Gray */
 }
 
 nav ul li a:hover {
@@ -52,15 +49,65 @@ nav ul li a:hover {
 /* Main Content Styling */
 main {
     padding: 20px;
+    background-color: #6d76c2e1; /* Light Gray */
 }
 
 /* Footer Styling */
 footer {
-    background-color: #8AA79F; /* Light Green */
-    color: #001524; /* Dark Blue */
+    background-color: #d3d3d3d5; /* Soft Gray */
+    color: #000000; /* Dark Gray */
     text-align: center;
     padding: 10px 0;
     position: fixed;
     width: 100%;
     bottom: 0;
+}
+
+/* Button Style */
+button {
+    /*background-color: #7681e7e1; /* Pinkish Gray */
+    color: #000000; /* Dark Gray */
+    border: 1px solid #7681e7e1;
+    padding: 6px 12px;
+    cursor: pointer;
+    z-index: 9999; /* Ensures the button is on top */
+    position: relative; /* Ensures z-index works */
+}
+form { 
+    overflow: visible; /* Ensures the form does not hide the button */ 
+}
+
+.form-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.form-section {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    margin: 0 -5px; /* Reduce the margin value between sections */
+    padding: 0; /* Remove any padding if necessary */
+}
+
+.form-container {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.form-section.left,
+.form-section.center,
+.form-section.right {
+    margin-bottom: 0px; /* Reduce the bottom margin */
+}
+
+form input,
+form select,
+form textarea {
+    margin: 0 0 0px 0; /* Reduce the top and bottom margin */
+    padding: 2px; /* Adjust the padding inside the form elements */
+}
+
+form label {
+    margin-bottom: 0px; /* Adjust the bottom margin of the labels */
 }

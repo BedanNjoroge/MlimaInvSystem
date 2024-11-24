@@ -1,52 +1,65 @@
 {% extends "base.html" %}
 
-{% block title %}Separation{% endblock %}
+{% block title %}Separation Section - Mlima Granite{% endblock %}
 
 {% block content %}
-    <h1>Separation</h1>
-    <form method="post">
-        <label for="boulder_id">Boulder ID:</label><br>
-        <select id="boulder_id" name="boulder_id" required onchange="autoFillDescription();">
-            <option value="">Select Boulder</option>
-            {% for boulder_id in boulder_ids %}
-                <option value="{{ boulder_id }}">{{ boulder_id }}</option>
-            {% endfor %}
-        </select><br>
+    <h2>Separation Section</h2>
+    <div class="form-container">
+        <form method="POST">
+            <div class="form-section left">
+                <label for="boulder_id">Boulder ID:</label><br>
+                <select id="boulder_id" name="boulder_id" required onchange="autoFillDescription(); autoFillNumSlabsCut();">
+                    <option value="">Select Boulder</option>
+                    {% for id in boulder_ids %}
+                        <option value="{{ id }}">{{ id }}</option>
+                    {% endfor %}
+                </select><br>
 
-        <label for="description">Description:</label><br>
-        <input type="text" id="description" name="description" required><br>
+                <label for="boulder_description">Boulder Description:</label><br>
+                <input type="text" id="boulder_description" name="boulder_description" readonly><br>
 
-        <label for="separation_time">Separation Time (Auto Generated):</label><br>
-        <input type="text" id="separation_time" name="separation_time" readonly><br>
+                <label for="num_slabs_cut">Number of Slabs Cut:</label><br>
+                <input type="number" id="num_slabs_cut" name="num_slabs_cut" readonly><br>
 
-        <label for="good_slabs">Good Slabs:</label><br>
-        <input type="number" id="good_slabs" name="good_slabs" required><br>
+                <label for="slab_description">Slab Description (color, size):</label><br>
+                <input type="text" id="slab_description" name="slab_description" required><br>
+            </div>
 
-        <label for="defect_line">Defect Line:</label><br>
-        <input type="number" id="defect_line" name="defect_line" required><br>
+            <div class="form-section right">
+                <label for="good_slabs">Good Slabs:</label><br>
+                <input type="number" id="good_slabs" name="good_slabs" required><br>
 
-        <label for="natural_cracks">Natural Cracks:</label><br>
-        <input type="number" id="natural_cracks" name="natural_cracks" required><br>
+                <label for="defect_line">Defect Line Slabs:</label><br>
+                <input type="number" id="defect_line" name="defect_line" required><br>
 
-        <label for="cutting_cracks">Cutting Cracks:</label><br>
-        <input type="number" id="cutting_cracks" name="cutting_cracks" required><br>
+                <label for="natural_cracks">Natural Cracks Slabs:</label><br>
+                <input type="number" id="natural_cracks" name="natural_cracks" required><br>
 
-        <label for="thickness_issue">Thickness Issue:</label><br>
-        <input type="number" id="thickness_issue" name="thickness_issue" required><br>
+                <label for="cutting_cracks">Cutting Cracks Slabs:</label><br>
+                <input type="number" id="cutting_cracks" name="cutting_cracks" required><br>
 
-        <input type="submit" value="Submit">
-    </form>
+                <label for="thickness_issue">Thickness Issue Slabs:</label><br>
+                <input type="number" id="thickness_issue" name="thickness_issue" required><br>
 
-    <h2>Previous Separations</h2>
+                <button type="submit">Submit</button>
+            </div>
+        </form>
+    </div>
+
+    {#  
+    <h2>Separations</h2>
     <table>
         <tr>
             <th>Boulder ID</th>
-            <th>Description</th>
+            <th>Boulder Description</th>
+            <th>Slab ID</th>
+            <th>Slab Description</th>
             <th>Good Slabs</th>
             <th>Defect Line</th>
             <th>Natural Cracks</th>
             <th>Cutting Cracks</th>
             <th>Thickness Issue</th>
+            <th>Total Slabs</th>
             <th>Separation Time</th>
         </tr>
         {% for separation in separations %}
@@ -59,30 +72,33 @@
             <td>{{ separation[6] }}</td>
             <td>{{ separation[7] }}</td>
             <td>{{ separation[8] }}</td>
+            <td>{{ separation[9] }}</td>
+            <td>{{ separation[10] }}</td>
+            <td>{{ separation[11] }}</td>
         </tr>
         {% endfor %}
     </table>
+    #}
 
     <script>
-        console.log('Boulder descriptions:', {{ boulder_dict | tojson | safe }});
-
         const boulderDescriptions = {{ boulder_dict | tojson | safe }};
+        const slabsCut = {{ slabs_cut | tojson | safe }};
         
         function autoFillDescription() {
             const boulderId = document.getElementById('boulder_id').value;
             const description = boulderDescriptions[boulderId] || '';
-            document.getElementById('description').value = description;
+            document.getElementById('boulder_description').value = description;
         }
 
-        function setSeparationTime() {
-            const now = new Date();
-            const tzOffset = 180; // East Africa Time is UTC+3 hours
-            const localTime = new Date(now.getTime() + tzOffset * 60000);
-            const isoString = localTime.toISOString().slice(0, 19); // Remove milliseconds
-            document.getElementById('separation_time').value = isoString;
+        function autoFillNumSlabsCut() {
+            const boulderId = document.getElementById('boulder_id').value;
+            const numSlabsCut = slabsCut[boulderId] || 0;
+            document.getElementById('num_slabs_cut').value = numSlabsCut;
         }
 
-        // Set separation time when the page loads
-        window.onload = setSeparationTime;
+        window.onload = function() {
+            autoFillDescription();
+            autoFillNumSlabsCut();
+        }
     </script>
 {% endblock %}

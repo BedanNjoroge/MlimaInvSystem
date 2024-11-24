@@ -3,7 +3,7 @@
 {% block title %}Cutting Machine 1{% endblock %}
 
 {% block content %}
-    <h1>Cutting Machine 1</h1>
+    <h2>Cutting Machine 1 Section</h2>
     <form method="post" onsubmit="setEndTime()">
         <label for="boulder_id">Boulder ID:</label><br>
         <select id="boulder_id" name="boulder_id" required onchange="autoFillDescription(); setStartTime();">
@@ -27,7 +27,8 @@
 
         <input type="submit" value="Submit">
     </form>
-
+    
+    {#
     <h2>Previous Cuts</h2>
     <table>
         <tr>
@@ -49,7 +50,8 @@
         </tr>
         {% endfor %}
     </table>
-
+    #}
+    
     <script>
         console.log('Boulder descriptions:', {{ boulder_dict | tojson | safe }});
 
