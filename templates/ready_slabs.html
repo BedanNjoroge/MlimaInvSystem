@@ -1,31 +1,23 @@
 {% extends "base.html" %}
 
-{% block title %}Polishing Section - Mlima Granite{% endblock %}
+{% block title %}Ready Slabs Section - Mlima Granite{% endblock %}
 
 {% block content %}
-    <h2>Polishing Section</h2>
+    <h2>Ready Slabs Section</h2>
     <div class="form-container">
         <form method="POST">
             <div class="form-section left">
                 <label for="slab_id">Slab ID:</label><br>
-                <select id="slab_id" name="slab_id" required onchange="autoFillDetails();">
+                <select id="slab_id" name="slab_id" required onchange="autoFillDescription();">
                     <option value="">Select Slab</option>
-                    {% for slab_id, slab_description, original_status in slabs %}
-                        <option value="{{ slab_id }}" data-description="{{ slab_description }}" data-status="{{ original_status }}">{{ slab_id }}</option>
+                    {% for slab_id, sealant_description in slabs %}
+                        <option value="{{ slab_id }}" data-description="{{ sealant_description }}">{{ slab_id }}</option>
                     {% endfor %}
                 </select><br>
 
-                <label for="slab_description">Slab Description:</label><br>
-                <input type="text" id="slab_description" name="slab_description" readonly><br>
+                <label for="sealant_description">Sealant Description:</label><br>
+                <input type="text" id="sealant_description" name="sealant_description" readonly><br>
 
-                <label for="original_status">Original Status:</label><br>
-                <input type="text" id="original_status" name="original_status" readonly><br>
-
-                <label for="polishing_description">Polishing Description:</label><br>
-                <input type="text" id="polishing_description" name="polishing_description" required><br>
-            </div>
-
-            <div class="form-section right">
                 <label for="good_slab">Good Slab:</label><br>
                 <select id="good_slab" name="good_slab">
                     <option value="Yes">Yes</option>
@@ -61,49 +53,43 @@
         </form>
     </div>
 
-    {#    
-    <h2>Polished Slabs</h2>
+    {#
+    <h2>Ready Slabs</h2>
     <table>
         <tr>
             <th>Slab ID</th>
-            <th>Slab Description</th>
-            <th>Original Status</th>
-            <th>Polishing Description</th>
+            <th>Sealant Description</th>
             <th>Good Slab</th>
             <th>Defect Line</th>
             <th>Natural Cracks</th>
             <th>Cutting Cracks</th>
             <th>Thickness Issue</th>
-            <th>Polishing Time</th>
+            <th>Ready Time</th>
         </tr>
-        {% for polished in polished_slabs %}
+        {% for ready_slab in ready_slabs_data %}
         <tr>
-            <td>{{ polished[1] }}</td>
-            <td>{{ polished[2] }}</td>
-            <td>{{ polished[3] }}</td>
-            <td>{{ polished[4] }}</td>
-            <td>{{ polished[5] }}</td>
-            <td>{{ polished[6] }}</td>
-            <td>{{ polished[7] }}</td>
-            <td>{{ polished[8] }}</td>
-            <td>{{ polished[9] }}</td>
-            <td>{{ polished[10] }}</td>
+            <td>{{ ready_slab[1] }}</td>
+            <td>{{ ready_slab[2] }}</td>
+            <td>{{ ready_slab[3] }}</td>
+            <td>{{ ready_slab[4] }}</td>
+            <td>{{ ready_slab[5] }}</td>
+            <td>{{ ready_slab[6] }}</td>
+            <td>{{ ready_slab[7] }}</td>
+            <td>{{ ready_slab[8] }}</td>
         </tr>
         {% endfor %}
     </table>
     #}
 
     <script>
-        function autoFillDetails() {
+        function autoFillDescription() {
             const slabSelect = document.getElementById('slab_id');
             const selectedOption = slabSelect.options[slabSelect.selectedIndex];
             const description = selectedOption.getAttribute('data-description');
-            const status = selectedOption.getAttribute('data-status');
 
-            document.getElementById('slab_description').value = description;
-            document.getElementById('original_status').value = status;
+            document.getElementById('sealant_description').value = description;
         }
 
-        window.onload = autoFillDetails;
+        window.onload = autoFillDescription;
     </script>
 {% endblock %}

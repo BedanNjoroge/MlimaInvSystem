@@ -5,15 +5,12 @@
 {% block content %}
     <h2>Quarry Section</h2>
     <div class="form-container">
-        <form method="post">
-            <label for="boulder_id">Boulder ID:</label><br>
-            <input type="text" id="boulder_id" name="boulder_id" required><br>
-
+        <form method="POST">
             <label for="date">Date:</label><br>
             <input type="date" id="date" name="date" required><br>
 
-            <label for="description">Description (color, size):</label><br>
-            <input type="text" id="description" name="description" required><br>
+            <label for="boulder_description">Boulder Description (color, size):</label><br>
+            <input type="text" id="boulder_description" name="boulder_description" required><br>
 
             <label for="good_boulder">Good Boulder:</label><br>
             <select id="good_boulder" name="good_boulder">
@@ -49,7 +46,35 @@
         </form>
     </div>
 
-    {% if message %}
-        <p class="message">{{ message }}</p>
-    {% endif %}
+    {#   
+    <h2>Boulders</h2>
+    <table>
+        <tr>
+            <th>Boulder ID</th>
+            <th>Date</th>
+            <th>Boulder Description</th>
+            <th>Good Boulder</th>
+            <th>Defect Line</th>
+            <th>Natural Cracks</th>
+            <th>Mining Cracks</th>
+            <th>Undersize</th>
+            <th>Total Boulders</th>
+        </tr>
+        {% for boulder in boulders %}
+        <tr>
+            <td>{{ boulder[0] }}</td>
+            <td>{{ boulder[1] }}</td>
+            <td>{{ boulder[2] }}</td>
+            <td>{{ boulder[4] }}</td>
+            <td>{{ boulder[5] }}</td>
+            <td>{{ boulder[6] }}</td>
+            <td>{{ boulder[7] }}</td>
+            <td>{{ boulder[8] }}</td>
+            <td>{{ boulder[9] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    #}
+
 {% endblock %}
+

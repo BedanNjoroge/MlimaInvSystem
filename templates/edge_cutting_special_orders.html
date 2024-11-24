@@ -1,0 +1,128 @@
+{% extends "base.html" %}
+
+{% block title %}Edge Cutting Special Orders - Mlima Granite{% endblock %}
+
+{% block content %}
+    <h2>Edge Cutting Special Orders</h2>
+    <div class="form-container">
+        <form method="POST">
+            <div class="form-section left">
+                <label for="slab_id">Slab ID:</label><br>
+                <select id="slab_id" name="slab_id" required onchange="autoFillDescription();">
+                    <option value="">Select Slab</option>
+                    {% for slab_id, polishing_description in slabs %}
+                        <option value="{{ slab_id }}" data-description="{{ polishing_description }}">{{ slab_id }}</option>
+                    {% endfor %}
+                </select><br>
+
+                <label for="polishing_description">Polishing Description:</label><br>
+                <input type="text" id="polishing_description" name="polishing_description" readonly><br>
+
+                <label for="edge_cutting_description">Edge Cutting Description (color, size):</label><br>
+                <input type="text" id="edge_cutting_description" name="edge_cutting_description" required><br>
+            </div>
+
+            <div class="form-section left">
+                <label for="special_order_size">Number of Slabs:</label><br>
+                <input type="number" id="special_order_size" name="special_order_size" min="1" onchange="generateSlabFields();"><br>
+
+                <div id="special_order_fields"></div>
+            </div>
+
+            <div class="form-section left">
+                <label for="good_slab">Good Slab:</label><br>
+                <select id="good_slab" name="good_slab">
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                </select><br>
+
+                <label for="defect_line">Defect Line:</label><br>
+                <select id="defect_line" name="defect_line">
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                </select><br>
+
+                <label for="natural_cracks">Natural Cracks:</label><br>
+                <select id="natural_cracks" name="natural_cracks">
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                </select><br>
+
+                <label for="cutting_cracks">Cutting Cracks:</label><br>
+                <select id="cutting_cracks" name="cutting_cracks">
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                </select><br>
+
+                <label for="thickness_issue">Thickness Issue:</label><br>
+                <select id="thickness_issue" name="thickness_issue">
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                </select><br>
+
+                <button type="submit">Submit</button>
+            </div>
+        </form>
+    </div>
+
+    {# 
+    <h2>Edge Cut Slabs</h2>
+    <table>
+        <tr>
+            <th>Slab ID</th>
+            <th>Polishing Description</th>
+            <th>Edge Cutting Description</th>
+            <th>Special Order Details</th>
+            <th>Good Slab</th>
+            <th>Defect Line</th>
+            <th>Natural Cracks</th>
+            <th>Cutting Cracks</th>
+            <th>Thickness Issue</th>
+            <th>Edge Cutting Time</th>
+        </tr>
+        {% for edge_cut in edge_cut_slabs %}
+        <tr>
+            <td>{{ edge_cut[1] }}</td>
+            <td>{{ edge_cut[2] }}</td>
+            <td>{{ edge_cut[3] }}</td>
+            <td>{{ edge_cut[4] }}</td>
+            <td>{{ edge_cut[5] }}</td>
+            <td>{{ edge_cut[6] }}</td>
+            <td>{{ edge_cut[7] }}</td>
+            <td>{{ edge_cut[8] }}</td>
+            <td>{{ edge_cut[9] }}</td>
+            <td>{{ edge_cut[10] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    #}
+
+    <script>
+        function autoFillDescription() {
+            const slabSelect = document.getElementById('slab_id');
+            const selectedOption = slabSelect.options[slabSelect.selectedIndex];
+            const description = selectedOption.getAttribute('data-description');
+
+            document.getElementById('polishing_description').value = description;
+        }
+
+        function generateSlabFields() {
+            const numSlabs = document.getElementById('special_order_size').value;
+            const specialOrderFields = document.getElementById('special_order_fields');
+            specialOrderFields.innerHTML = '';
+            
+            for (let i = 0; i < numSlabs; i++) {
+                const slabDiv = document.createElement('div');
+                slabDiv.className = 'slab-field';
+                slabDiv.innerHTML = `
+                    <label for="special_order_description_${i}">Slab ${i + 1} Description (color, size):</label><br>
+                    <input type="text" id="special_order_description_${i}" name="special_order_description[]" required><br>
+                    <input type="hidden" name="special_order_size[]" value="${i + 1}">
+                `;
+                specialOrderFields.appendChild(slabDiv);
+            }
+        }
+
+        window.onload = autoFillDescription;
+    </script>
+{% endblock %}

@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+
+{% block title %}Bullnose Section - Mlima Granite{% endblock %}
+
+{% block content %}
+    <h2>Bullnose Section</h2>
+    <div class="form-container">
+        <form method="POST">
+            <div class="form-section left">
+                <label for="slab_id">Slab ID:</label><br>
+                <select id="slab_id" name="slab_id" required onchange="autoFillDescription();">
+                    <option value="">Select Slab</option>
+                    {% for slab_id, edge_cutting_description in slabs %}
+                        <option value="{{ slab_id }}" data-description="{{ edge_cutting_description }}">{{ slab_id }}</option>
+                    {% endfor %}
+                </select><br>
+
+                <label for="edge_cutting_description">Edge Cutting Description:</label><br>
+                <input type="text" id="edge_cutting_description" name="edge_cutting_description" readonly><br>
+
+                <label for="bullnose_description">Bullnose Description:</label><br>
+                <input type="text" id="bullnose_description" name="bullnose_description" required><br>
+
+                <label for="good_slab">Good Slab:</label><br>
+                <select id="good_slab" name="good_slab">
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                </select><br>
+
+                <label for="defect_line">Defect Line:</label><br>
+                <select id="defect_line" name="defect_line">
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                </select><br>
+
+                <label for="natural_cracks">Natural Cracks:</label><br>
+                <select id="natural_cracks" name="natural_cracks">
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                </select><br>
+
+                <label for="cutting_cracks">Cutting Cracks:</label><br>
+                <select id="cutting_cracks" name="cutting_cracks">
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                </select><br>
+
+                <label for="thickness_issue">Thickness Issue:</label><br>
+                <select id="thickness_issue" name="thickness_issue">
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                </select><br>
+
+                <button type="submit">Submit</button>
+            </div>
+        </form>
+    </div>
+
+    {# 
+    <h2>Bullnosed Slabs</h2>
+    <table>
+        <tr>
+            <th>Slab ID</th>
+            <th>Edge Cutting Description</th>
+            <th>Bullnose Description</th>
+            <th>Good Slab</th>
+            <th>Defect Line</th>
+            <th>Natural Cracks</th>
+            <th>Cutting Cracks</th>
+            <th>Thickness Issue</th>
+            <th>Bullnose Time</th>
+        </tr>
+        {% for bullnose in bullnosed_slabs %}
+        <tr>
+            <td>{{ bullnose[1] }}</td>
+            <td>{{ bullnose[2] }}</td>
+            <td>{{ bullnose[3] }}</td>
+            <td>{{ bullnose[4] }}</td>
+            <td>{{ bullnose[5] }}</td>
+            <td>{{ bullnose[6] }}</td>
+            <td>{{ bullnose[7] }}</td>
+            <td>{{ bullnose[8] }}</td>
+            <td>{{ bullnose[9] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    #}
+
+    <script>
+        function autoFillDescription() {
+            const slabSelect = document.getElementById('slab_id');
+            const selectedOption = slabSelect.options[slabSelect.selectedIndex];
+            const description = selectedOption.getAttribute('data-description');
+
+            document.getElementById('edge_cutting_description').value = description;
+        }
+
+        window.onload = autoFillDescription;
+    </script>
+{% endblock %}
